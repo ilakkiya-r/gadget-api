@@ -12,8 +12,8 @@ const port = process.env.PORT || 3000;
 // Middleware to parse JSON bodies
 app.use(express.json());
 
-// Use the router returned by appRoutes
-app.use('/api', appRoutes()); // This will correctly mount the appRoutes Router at /api
+
+app.use('/api', appRoutes()); 
 
 db.sequelize?.sync().then(() => {
     app.listen(port, () => {

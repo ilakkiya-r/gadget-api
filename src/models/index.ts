@@ -25,21 +25,21 @@ if (config.use_env_variable) {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
-// ✅ Explicitly initialize models
+// Explicitly initialize models
 initUserModel(sequelize);
 initGadgetModel(sequelize);
 
-// ✅ Assign models to db object
+// Assign models to db object
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 db.User = User;
 db.Gadget = Gadget;
 
-// ✅ Sync models before using them
+// Sync models before using them
 sequelize
-  .sync({ force: false }) // Change to true only if you want to reset tables
-  .then(() => console.log("✅ Database & tables synced successfully"))
-  .catch((err) => console.error("❌ Sequelize sync error:", err));
+  .sync({ force: false }) 
+  .then(() => console.log("Database & tables synced successfully"))
+  .catch((err) => console.error("Sequelize sync error:", err));
 
 export default db;
 export { sequelize, User, Gadget };
