@@ -14,7 +14,11 @@
     "dialect": "postgres"
   },
   "production": {
-    "use_env_variable": "DATABASE_URL",
+    "username": "user",
+    "password": "RzlL3vTLNch75F7RuDfwnUuzubNekDN6",
+    "database": "gadget_r0xb",
+    "host": "dpg-cuh4r6a3esus73fkm5fg-a.oregon-postgres.render.com",
+    "port": 5432,
     "dialect": "postgres"
   }
 }
