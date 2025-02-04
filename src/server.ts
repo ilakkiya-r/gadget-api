@@ -12,6 +12,11 @@ const port = process.env.PORT || 3000;
 // Middleware to parse JSON bodies
 app.use(express.json());
 
+//testing
+app.get('/api/test', (req, res) => {
+    res.json({ message: "Server is running!" });
+});
+
 
 app.use('/api', appRoutes()); 
 
