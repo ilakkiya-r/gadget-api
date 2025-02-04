@@ -40,3 +40,5 @@ export default {
     await queryInterface.dropTable("users");
   },
 };
+ 	
+

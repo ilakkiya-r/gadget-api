@@ -21,7 +21,10 @@ if (config.use_env_variable) {
     exports.sequelize = sequelize = new sequelize_1.Sequelize(process_1.default.env[config.use_env_variable], config);
 }
 else {
-    exports.sequelize = sequelize = new sequelize_1.Sequelize(config.database, config.username, config.password, config);
+    exports.sequelize = sequelize = new sequelize_1.Sequelize(process_1.default.env.DB_NAME || config.database, process_1.default.env.DB_USERNAME || config.username, process_1.default.env.DB_PASSWORD || config.password, {
+        host: process_1.default.env.DB_HOST || config.host,
+        dialect: config.dialect,
+    });
 }
 // Explicitly initialize models
 (0, user_1.initUserModel)(sequelize);
