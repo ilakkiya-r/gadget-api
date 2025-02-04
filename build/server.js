@@ -2,7 +2,6 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
@@ -18,7 +17,8 @@ app.get('/api/test', (req, res) => {
     res.json({ message: "Server is running!" });
 });
 app.use('/api', (0, index_1.default)());
-(_a = models_1.default.sequelize) === null || _a === void 0 ? void 0 : _a.sync().then(() => {
+// Sync database and start the server
+models_1.default.sequelize.sync({ force: false }).then(() => {
     app.listen(port, () => {
         console.log(`App listening on port ${port}`);
     });

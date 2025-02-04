@@ -22,10 +22,7 @@ if (process_1.default.env.DATABASE_URL) {
         dialect: "postgres",
         protocol: "postgres",
         dialectOptions: {
-            ssl: {
-                require: true,
-                rejectUnauthorized: false,
-            },
+            ssl: false,
         },
     });
 }
@@ -40,9 +37,4 @@ db.sequelize = sequelize;
 db.Sequelize = sequelize_1.Sequelize;
 db.User = user_1.User;
 db.Gadget = gadget_1.Gadget;
-// Sync models before using them
-sequelize
-    .sync({ force: false })
-    .then(() => console.log("Database & tables synced successfully"))
-    .catch((err) => console.error("Sequelize sync error:", err));
 exports.default = db;

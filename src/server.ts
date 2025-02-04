@@ -1,7 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import db from './models';
-import { Sequelize } from 'sequelize';
+
 
 import appRoutes from './routes/index';
 
@@ -21,7 +21,8 @@ app.get('/api/test', (req, res) => {
 
 app.use('/api', appRoutes()); 
 
-db.sequelize?.sync().then(() => {
+// Sync database and start the server
+db.sequelize.sync({ force: false }).then(() => { 
     app.listen(port, () => {
         console.log(`App listening on port ${port}`);
     });
