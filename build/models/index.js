@@ -15,12 +15,19 @@ const basename = path_1.default.basename(__filename);
 const env = process_1.default.env.NODE_ENV || "development";
 const config = require(path_1.default.join(__dirname, "../config/config.json"))[env];
 const db = {};
-const sequelize = new sequelize_1.Sequelize(config.database, config.username, config.password, {
-    host: config.host,
-    port: config.port,
-    dialect: config.dialect,
-});
-exports.sequelize = sequelize;
+// Initialize Sequelize instance
+let sequelize;
+if (config.use_env_variable) {
+    exports.sequelize = sequelize = new sequelize_1.Sequelize(process_1.default.env[config.use_env_variable], config);
+}
+else {
+    exports.sequelize = sequelize = new sequelize_1.Sequelize(config.database, config.username, config.password, {
+        host: config.host,
+        port: config.port,
+        dialect: config.dialect,
+        dialectOptions: config.dialectOptions, // Include SSL configuration here
+    });
+}
 // Explicitly initialize models
 (0, user_1.initUserModel)(sequelize);
 (0, gadget_1.initGadgetModel)(sequelize);

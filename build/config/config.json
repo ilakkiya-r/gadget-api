@@ -19,6 +19,12 @@
     "database": "gadget_r0xb",
     "host": "dpg-cuh4r6a3esus73fkm5fg-a.oregon-postgres.render.com",
     "port": 5432,
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
   }
 }

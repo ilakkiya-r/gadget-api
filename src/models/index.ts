@@ -17,16 +17,24 @@ interface DbInterface {
 
 const db = {} as DbInterface;
 
-const sequelize = new Sequelize(
-  config.database,
-  config.username,
-  config.password,
-  {
-    host: config.host,
-    port: config.port,
-    dialect: config.dialect,
-  }
-);
+// Initialize Sequelize instance
+let sequelize: Sequelize;
+if (config.use_env_variable) {
+  sequelize = new Sequelize(process.env[config.use_env_variable] as string, config);
+} else {
+  sequelize = new Sequelize(
+    config.database,
+    config.username,
+    config.password,
+    {
+      host: config.host,
+      port: config.port,
+      dialect: config.dialect,
+      dialectOptions: config.dialectOptions,  // Include SSL configuration here
+    }
+  );
+}
+
 
 // Explicitly initialize models
 initUserModel(sequelize);
