@@ -19,18 +19,10 @@ const db = {} as DbInterface;
 
 // Initialize Sequelize instance
 let sequelize: Sequelize;
-if (process.env.DATABASE_URL) {
-  
-  sequelize = new Sequelize(process.env.DATABASE_URL as string, {
-    dialect: "postgres",
-    protocol: "postgres",
-
-    dialectOptions: {
-      ssl: false, 
-    },
-  });
+if (config.use_env_variable) {
+  sequelize = new Sequelize(process.env[config.use_env_variable] as string, config);
 } else {
-    sequelize = new Sequelize(config.database, config.username, config.password, config);
+  sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
 // Explicitly initialize models
@@ -42,7 +34,6 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 db.User = User;
 db.Gadget = Gadget;
-
 
 
 export default db;
