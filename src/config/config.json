@@ -14,7 +14,7 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "root",
+    "username": "postgres",
     "password": "admin",
     "database": "gadget_task",
     "host": "127.0.0.1",

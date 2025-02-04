@@ -17,8 +17,17 @@ const config = require(path_1.default.join(__dirname, "../config/config.json"))[
 const db = {};
 // Initialize Sequelize instance
 let sequelize;
-if (config.use_env_variable) {
-    exports.sequelize = sequelize = new sequelize_1.Sequelize(process_1.default.env[config.use_env_variable], config);
+if (process_1.default.env.DATABASE_URL) {
+    exports.sequelize = sequelize = new sequelize_1.Sequelize(process_1.default.env.DATABASE_URL, {
+        dialect: "postgres",
+        protocol: "postgres",
+        dialectOptions: {
+            ssl: {
+                require: true,
+                rejectUnauthorized: false,
+            },
+        },
+    });
 }
 else {
     exports.sequelize = sequelize = new sequelize_1.Sequelize(config.database, config.username, config.password, config);

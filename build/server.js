@@ -10,7 +10,7 @@ const models_1 = __importDefault(require("./models"));
 const index_1 = __importDefault(require("./routes/index"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
-const port = process.env.DB_PORT || 5432;
+const port = process.env.PORT || 3000;
 // Middleware to parse JSON bodies
 app.use(express_1.default.json());
 //testing

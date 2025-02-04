@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import db from './models';
+import { Sequelize } from 'sequelize';
 
 import appRoutes from './routes/index';
 
