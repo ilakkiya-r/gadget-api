@@ -21,11 +21,17 @@ const db = {} as DbInterface;
 let sequelize: Sequelize;
 if (process.env.DATABASE_URL) {
   
+  console.log("Connecting to PostgreSQL using DATABASE_URL...");
   sequelize = new Sequelize(process.env.DATABASE_URL as string, {
     dialect: "postgres",
     protocol: "postgres",
+    logging: console.log, // Enable SQL logging for debugging
+    dialectOptions: {
+      ssl: false, // Set to `true` if you're using SSL
+    },
   });
 } else {
+  console.log("Connecting to PostgreSQL using local config...");
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
