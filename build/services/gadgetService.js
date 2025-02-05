@@ -13,6 +13,10 @@ exports.selfDestructGadgetServices = exports.softDeleteGadgetServices = exports.
 const gadget_1 = require("../models/gadget");
 // Create a new gadget
 const createGadgetServices = (gadgetData) => __awaiter(void 0, void 0, void 0, function* () {
+    const existingGadget = yield gadget_1.Gadget.findOne({ where: { name: gadgetData.name } });
+    if (existingGadget) {
+        return null;
+    }
     return yield gadget_1.Gadget.create(Object.assign(Object.assign({}, gadgetData), { mission_success_probability: Math.random() * 100 }));
 });
 exports.createGadgetServices = createGadgetServices;

@@ -6,6 +6,9 @@ import { statusCode } from '../utils/status_code';
 export const createGadget:any = async (req: Request, res: Response)=> {
   try {
     const newGadget = await createGadgetServices(req.body);
+    if (!newGadget) {
+      return res.status(statusCode.BAD_REQUEST).json({ message: 'Gadget with this name already exists' });
+    }
     return res.status(statusCode.OK).json(newGadget);  
   } catch (error) {
     return res.status(statusCode.INTERNAL_SERVER_STATUS).json({ message: 'Error creating gadget' });

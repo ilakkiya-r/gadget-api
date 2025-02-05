@@ -16,6 +16,9 @@ const status_code_1 = require("../utils/status_code");
 const createGadget = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const newGadget = yield (0, gadgetService_1.createGadgetServices)(req.body);
+        if (!newGadget) {
+            return res.status(status_code_1.statusCode.BAD_REQUEST).json({ message: 'Gadget with this name already exists' });
+        }
         return res.status(status_code_1.statusCode.OK).json(newGadget);
     }
     catch (error) {

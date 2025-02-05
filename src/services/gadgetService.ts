@@ -3,6 +3,11 @@ import { Gadget } from '../models/gadget';
 
 // Create a new gadget
 export const createGadgetServices = async (gadgetData: any) => {
+
+  const existingGadget = await Gadget.findOne({ where: { name: gadgetData.name } });
+  if (existingGadget) {
+    return null;
+  }
   return await Gadget.create({
     ...gadgetData,
     mission_success_probability: Math.random() * 100,

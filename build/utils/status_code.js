@@ -8,4 +8,5 @@ exports.statusCode = {
     NOT_FOUND_STATUS: 404,
     UNAUTHORIZED: 401,
     FORBIDDEN: 403,
+    BAD_REQUEST: 400
 };
